@@ -1,0 +1,342 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Container for content */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+/* Note list styles */
+.note-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.note-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    color: #1a202c;
+    text-decoration: none;
+    padding: 25px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: center;
+    min-height: 120px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative;
+    overflow: hidden;
+    word-wrap: break-word;
+    hyphens: auto;
+    letter-spacing: 0.3px;
+}
+
+.note-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    border-color: #cbd5e0;
+    color: #2d3748;
+}
+
+.note-card:hover::before {
+    opacity: 1;
+}
+
+/* Form styles */
+.upload-form,
+.edit-form {
+    background: #f8f9fa;
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    margin-bottom: 20px;
+    transition: all 0.3s ease;
+}
+
+.upload-form:hover,
+.edit-form:hover {
+    border-color: #667eea;
+    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.1);
+}
+
+/* Form field styles */
+input[type="text"],
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #fff;
+    margin-bottom: 15px;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Label styles */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #495057;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Button styles */
+button,
+.btn {
+    padding: 15px 30px;
+    border: none;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Default button (Add note) */
+button:not(.btn),
+.btn:not(.btn-delete):not(.btn-submit) {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+button:not(.btn):hover,
+.btn:not(.btn-delete):not(.btn-submit):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+}
+
+/* Save button */
+.btn-submit {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(40, 167, 69, 0.4);
+}
+
+/* Delete button */
+.btn-delete {
+    background: linear-gradient(45deg, #dc3545, #fd7e14);
+    color: white;
+    box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+}
+
+.btn-delete:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(220, 53, 69, 0.4);
+}
+
+/* Button press effect */
+button:active,
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Link styles */
+a:not(.note-card):not(.btn) {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    font-size: 15px;
+}
+
+a:not(.note-card):not(.btn):hover {
+    background: #e9ecef;
+    border-color: #667eea;
+    transform: translateX(5px);
+    color: #5a67d8;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+/* Form spacing */
+form {
+    margin-bottom: 20px;
+}
+
+form:last-child {
+    margin-bottom: 0;
+}
+
+/* Inline button row */
+.button-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.inline-form {
+    margin: 0;
+}
+
+/* Back button styling */
+.btn-back {
+    background: #6c757d !important;
+    color: white !important;
+    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3) !important;
+    margin: 0 !important;
+}
+
+.btn-back:hover {
+    background: #5a6268 !important;
+    color: white !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 15px 35px rgba(108, 117, 125, 0.4) !important;
+}
+
+/* File input styling */
+input[type="file"] {
+    background: #fff;
+    border: 2px dashed #dee2e6;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]:hover {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.05);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .note-list {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .upload-form,
+    .edit-form {
+        padding: 20px;
+    }
+
+    button,
+    .btn {
+        padding: 12px 25px;
+        font-size: 14px;
+    }
+}
+
+/* Animation for page load */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.note-card,
+.upload-form,
+.edit-form {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #764ba2, #667eea);
+}
