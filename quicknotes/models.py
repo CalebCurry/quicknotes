@@ -8,4 +8,4 @@ class Note(models.Model):
         return self.title
 
     def __repr__(self):
-        return __str__()
+        return self.__str__()
