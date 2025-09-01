@@ -12,9 +12,9 @@ def notes(request):
     return render(request, 'quicknotes/index.html', {'notes': data, 'form': NoteForm()})
     
 def note(request, note_id):
-    data = get_object_or_404(Note, pk=note_id)
-    note_form = NoteForm(instance=data)
-    return render(request, 'quicknotes/note.html', {'note': data, 'form': note_form})  
+    note = get_object_or_404(Note, pk=note_id)
+    form = NoteForm(instance=note)
+    return render(request, 'quicknotes/note.html', {'note': note, 'form': form})  
 
 @require_POST
 def add(request):
