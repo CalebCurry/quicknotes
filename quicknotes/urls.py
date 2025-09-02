@@ -17,10 +17,19 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from quicknotes import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('notes', views.NoteViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+
+    # templated site
     path('notes/', include("quicknotes_site.urls")),
-    path('api/notes/', views.api_notes, name='api_notes')
+
+    # api
+    #path('api/notes/', views.api_notes, name='api_notes')
+    path('api/', include(router.urls))
 ]
