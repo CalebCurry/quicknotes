@@ -3,6 +3,7 @@ from django.http import HttpResponse, JsonResponse
 from quicknotes.serializers import NoteSerializer
 from .models import Note
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response 
 
 def home(request):
     return HttpResponse("Welcome Home!")
@@ -14,3 +15,13 @@ def home(request):
 class NoteViewSet(ModelViewSet):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        serializer = self.get_serializer(queryset, many=True)
+        return Response({"data": serializer.data})
+    
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        return Response({"data": serializer.data})
