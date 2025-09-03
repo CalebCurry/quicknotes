@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-x5gz0fowje=++#=68i%+9a24olml4l#mp(zmuxv=wb4v2d#%&='
+SECRET_KEY = os.environ.get("SECRET_KEY")
+#print(SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,14 +81,22 @@ WSGI_APPLICATION = 'quicknotes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+DB_NAME = os.environ.get("DB_NAME")
+DB_USER =  os.environ.get("DB_USER")
+DB_PASSWORD =  os.environ.get("DB_PASSWORD")
+DB_HOST =  os.environ.get("DB_HOST")
+DB_PORT =  os.environ.get("DB_PORT")
+
+#print("!!!!!", DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PORT)
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "postgres",
-        "USER": "postgres",
-        "PASSWORD": "password",
-        "HOST": "127.0.0.1",
-        "PORT": "5431",
+        "NAME": DB_NAME,
+        "USER": DB_USER,
+        "PASSWORD": DB_PASSWORD,
+        "HOST": DB_HOST,
+        "PORT": DB_PORT,
     }
 }
 
