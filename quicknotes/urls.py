@@ -21,6 +21,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register('notes', views.NoteViewSet)
+router.register('collections', views.CollectionViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
