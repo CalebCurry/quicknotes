@@ -14,3 +14,10 @@ class NoteSerializer(ModelSerializer):
     class Meta:
         model = Note
         fields = "__all__"
+
+class CollectionWithNotesSerializer(ModelSerializer):
+    notes = NoteSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Collection
+        fields = "__all__"
