@@ -19,7 +19,13 @@ class NoteViewSet(ModelViewSet):
     serializer_class = NoteSerializer
     
     def get_queryset(self):
-        return Note.objects.select_related("collection").all()
+        qs = Note.objects.select_related("collection")
+        #print(self.request.query_params) #type: ignore
+        collection_id = self.request.query_params.get("collection_id") #type: ignore
+        if collection_id:  
+            qs = qs.filter(collection_id=collection_id)
+        return qs
+
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
