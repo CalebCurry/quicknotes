@@ -24,16 +24,16 @@ class NoteViewSet(ModelViewSet):
         collection_id = self.request.query_params.get("collection_id") #type: ignore
         if collection_id:  
             qs = qs.filter(collection_id=collection_id)
-        return qs
+        return qs.order_by("id")
 
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
-        serializer = self.get_serializer(queryset, many=True)
+    # def list(self, request, *args, **kwargs):
+    #     queryset = self.filter_queryset(self.get_queryset())
+    #     serializer = self.get_serializer(queryset, many=True)
       
-        data = serializer.data
-        #print(len(connection.queries))
-        return Response({"data": data})
+    #     data = serializer.data
+    #     #print(len(connection.queries))
+    #     return Response({"data": data})
     
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
