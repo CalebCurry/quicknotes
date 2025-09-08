@@ -1,2 +1,14 @@
-GET http://localhost:8000/api/notes
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3MzU3MjgwLCJpYXQiOjE3NTczNTY5ODAsImp0aSI6IjI0NGZiODQ0ODc4MzQxYzE5YjBiZWE0YWYwOWEyZDdmIiwidXNlcl9pZCI6IjEifQ.TDREIvRpRUVvCRalnOXwsKMr7-iB_b8TtBmbnuZNGrw
+GET http://localhost:8000/api/notes/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3MzY2OTE4LCJpYXQiOjE3NTczNjY2MTgsImp0aSI6IjVmZGFhZDc2NDFlMzRlYmU4OTFhN2FjMWE4Mjk5NDI0IiwidXNlcl9pZCI6IjQifQ.CwL4emQ8GEWP4v22gEcggeA8y_c9LBSmlrSwCSDJapo
+
+###
+
+POST http://localhost:8000/api/auth/register/
+Content-Type: application/json
+
+{
+    "username": "Calcur2",
+    "email": "caleb@calebcurry.com",
+    "password": "password123"
+}
+
