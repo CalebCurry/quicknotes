@@ -24,6 +24,9 @@ class CollectionSerializer(ModelSerializer):
     class Meta:
         model = Collection
         fields = "__all__"
+        extra_kwargs = {
+            "user": {"read_only": True}
+        }
 
 class NoteSerializer(ModelSerializer):
     collection_data = CollectionSerializer(source="collection", read_only=True)
@@ -31,6 +34,9 @@ class NoteSerializer(ModelSerializer):
     class Meta:
         model = Note
         fields = "__all__"
+        extra_kwargs = {
+            "user": {"read_only": True}
+        }
 
 class CollectionWithNotesSerializer(ModelSerializer):
     notes = NoteSerializer(many=True, read_only=True)
@@ -38,3 +44,6 @@ class CollectionWithNotesSerializer(ModelSerializer):
     class Meta:
         model = Collection
         fields = "__all__"
+        extra_kwargs = {
+            "user": {"read_only": True}
+        }

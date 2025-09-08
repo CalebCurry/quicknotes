@@ -1,5 +1,16 @@
 GET http://localhost:8000/api/notes/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3MzY2OTE4LCJpYXQiOjE3NTczNjY2MTgsImp0aSI6IjVmZGFhZDc2NDFlMzRlYmU4OTFhN2FjMWE4Mjk5NDI0IiwidXNlcl9pZCI6IjQifQ.CwL4emQ8GEWP4v22gEcggeA8y_c9LBSmlrSwCSDJapo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mzc0NTM2LCJpYXQiOjE3NTczNzE1MzYsImp0aSI6ImMzOTkwZDllMjBjMDRlM2U4MjZkYjZjM2MwMTljMGFmIiwidXNlcl9pZCI6IjYifQ.itsM9E_RwcYH3EF8VDmryX0N8XIc4VjBA_WOv2saKPU
+
+###
+
+POST http://localhost:8000/api/notes/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3MzcxMzgxLCJpYXQiOjE3NTczNzEwODEsImp0aSI6IjA4OGYxMmIwNzE0YzQyMzY5OGZmMzE1NTA2MmZhNDQ4IiwidXNlcl9pZCI6IjYifQ.HAmrDrLErlMSpReX3rpQ6nixbhyEDpsqS5k8C5ctHiQ
+
+{
+    "title": "Example next user",
+    "content": "Example content next user"
+}
 
 ###
 
@@ -7,8 +18,25 @@ POST http://localhost:8000/api/auth/register/
 Content-Type: application/json
 
 {
-    "username": "Calcur2",
+    "username": "Calcur4",
     "email": "caleb@calebcurry.com",
     "password": "password123"
 }
 
+###
+
+POST http://localhost:8000/api/auth/login/
+Content-Type: application/json
+
+{
+    "username": "Calcur3",
+    "password": "password123"
+}
+
+
+
+### 
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mzc0NTUyLCJpYXQiOjE3NTczNzE1NTIsImp0aSI6ImFjNjFhNjUzNjA3NjQ1NzNiNTIzNzllZDMyMTdiZjQ2IiwidXNlcl9pZCI6IjUifQ.-oD541OBKAIMT6g52y2DYIBlZ8vgmUP6nyzRLZqe9AQ
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mzc0NTM2LCJpYXQiOjE3NTczNzE1MzYsImp0aSI6ImMzOTkwZDllMjBjMDRlM2U4MjZkYjZjM2MwMTljMGFmIiwidXNlcl9pZCI6IjYifQ.itsM9E_RwcYH3EF8VDmryX0N8XIc4VjBA_WOv2saKPU
