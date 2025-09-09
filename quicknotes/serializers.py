@@ -38,6 +38,12 @@ class NoteSerializer(ModelSerializer):
             "user": {"read_only": True}
         }
 
+    def validate_collection(self, collection):
+        request = self.context.get("request")
+        if request and collection.user != request.user:
+            raise serializers.ValidationError("You do not own this collection")
+        return collection
+
 class CollectionWithNotesSerializer(ModelSerializer):
     notes = NoteSerializer(many=True, read_only=True)
 
