@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
 
 def home(request):
-    return HttpResponse("Welcome Home!")
+    return HttpResponse("Welcome Home!!!!")
 
 @api_view(["POST"])
 @authentication_classes([])

@@ -1,9 +1,12 @@
 asgiref==3.9.1
 Django==5.2.4
 djangorestframework==3.16.1
+djangorestframework_simplejwt==5.5.1
 gunicorn==23.0.0
 packaging==25.0
 psycopg==3.2.9
+PyJWT==2.10.1
 python-dotenv==1.1.1
 sqlparse==0.5.3
+uWSGI==2.0.30
 whitenoise==6.9.0

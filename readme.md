@@ -26,3 +26,24 @@ pip install requirements.txt
 Next up, environment variables. You can use `.env-example` as a starting point. You will duplicate this and name it `.env`. 
 
 I launched a Postgres container for the database, but you can adjust as needed. If you change the database structure, you may need to update `settings.py`. 
+
+# Docker Example
+
+```
+docker build -t quicknotes . && docker run -it --rm -p 8000:8000 quicknotes
+```
+
+Run with compose:
+```
+docker compose up
+```
+
+To force an image rebuild:
+```
+docker compose up --build
+```
+
+Connect to the container with:
+```
+docker exec -it quicknotes-webdev-1 bash
+```
