@@ -12,7 +12,8 @@ services:
         condition: service_healthy
     command: >
       sh -c "python manage.py migrate --no-input &&
-      uwsgi --ini init.ini"
+      python manage.py runserver 0.0.0.0:8000"
+  # uwsgi --ini init.ini"
 
   db:
     image: postgres
@@ -28,6 +29,15 @@ services:
       retries: 5
     volumes:
       - postgres_data:/var/lib/postgresql/data    
+
+  frontend:
+    build:
+      context: ../quicknotes-frontend
+    volumes:
+      - ../quicknotes-frontend:/app 
+    ports:
+      - "80:80"
+    command: sh -c "npm run dev"
 
 volumes:
   postgres_data:
