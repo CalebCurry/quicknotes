@@ -1,4 +1,9 @@
 {
+  "overrides": {
+    "vite": {
+      "rollup": "npm:@rollup/wasm-node"
+    }
+  },
   "name": "quicknotes-frontend",
   "private": true,
   "version": "0.0.0",
