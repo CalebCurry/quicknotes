@@ -34,10 +34,11 @@ services:
     build:
       context: ../quicknotes-frontend
     volumes:
-      - ../quicknotes-frontend:/app 
+    
+      - ../quicknotes-frontend/src:/app/src
     ports:
-      - "80:80"
-    command: sh -c "npm run dev"
+      - "5173:5173"
+    command: sh -c "npm run dev -- --host 0.0.0.0"
 
 volumes:
   postgres_data:

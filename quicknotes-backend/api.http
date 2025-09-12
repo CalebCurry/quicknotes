@@ -24,7 +24,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiY
     "name": "Example collection"
 }
 
-###
+### Reigster
 
 POST http://localhost:8000/api/auth/register/
 Content-Type: application/json
