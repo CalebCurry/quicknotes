@@ -29,7 +29,7 @@ try {
 
   // Get notes by collection
   console.log("getNotesByCollection:", await SDK.getCollectionWithNotes(collection.id!));
-
+  console.log("getNotesCollectionIdParam", await SDK.getNotes({collection_id: collection.id!}))
   // Delete the note
   await SDK.deleteNote(createdNote.id!);
   console.log("deleteNote: success");

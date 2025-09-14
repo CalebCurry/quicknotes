@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const jwt =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3NzkwNDkxLCJpYXQiOjE3NTc3ODc0OTEsImp0aSI6ImM2OGJmYThlY2FlMzRiMWRhMjM5ZWE3YjliMGNlMDc0IiwidXNlcl9pZCI6IjEifQ.kcnSrj97hbFcdXVuALL2FG_YO9N6fHSo6iNV8qEzLmo"
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxMDM5NzcwNzc1NSwiaWF0IjoxNzU3Nzk0MTU1LCJqdGkiOiIzZDAzMjI5ZWU0NjI0MGQ5ODMwYjJmYWE1ZmQwZWY4YyIsInVzZXJfaWQiOiIxIn0.vigR__GU_YbuOBpSplu6TSPb0td4LFE_3wunR3BLqu4"
 const api = axios.create({
   baseURL: "http://localhost:8000",
   headers: {
@@ -29,8 +29,10 @@ async function getHome(): Promise<string> {
   return res.data
 }
 
-async function getNotes(): Promise<Note[]> {
-  const res = await api.get("/api/notes/");
+async function getNotes(params?: {
+  collection_id?: number
+}): Promise<Note[]> {
+  const res = await api.get("/api/notes/", {params});
   return res.data.data; 
 }
 
