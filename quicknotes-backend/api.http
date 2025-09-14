@@ -1,70 +1,55 @@
-GET http://localhost:8000/api/notes/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Nzg2MDk2LCJpYXQiOjE3NTc3ODMwOTYsImp0aSI6ImNkMjVlYjI4ZTU3YTQzZmQ5MzQ4YzAwNzkwZTFiY2UxIiwidXNlcl9pZCI6IjEifQ.JyZDg9XD282HlBSv70Vmu0ysKZVrP6OWINf1S3_wQMA
+@baseUrl = http://localhost:8000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxMDM5Nzc4NjU2NywiaWF0IjoxNzU3ODcyOTY3LCJqdGkiOiIyMTYxZmZjMWMxYmI0ZTgzOGY3MGFlYjI2NzBiNDk1YSIsInVzZXJfaWQiOiIxIn0.MMLN60dB6rkHpCKcLSP-irhP9OrmMfDmwsJbYROHVHY
 
+### Notes
+GET {{baseUrl}}/api/notes/
+Authorization: Bearer {{token}}
 
 ###
-GET http://localhost:8000/api/collections/1/notes/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Nzg2MDk2LCJpYXQiOjE3NTc3ODMwOTYsImp0aSI6ImNkMjVlYjI4ZTU3YTQzZmQ5MzQ4YzAwNzkwZTFiY2UxIiwidXNlcl9pZCI6IjEifQ.JyZDg9XD282HlBSv70Vmu0ysKZVrP6OWINf1S3_wQMA
 
+GET {{baseUrl}}/api/collections/1/notes/
+Authorization: Bearer {{token}}
 
-### 
+###
 
-POST http://localhost:8000/api/notes/
+POST {{baseUrl}}/api/notes/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Nzg2MDk2LCJpYXQiOjE3NTc3ODMwOTYsImp0aSI6ImNkMjVlYjI4ZTU3YTQzZmQ5MzQ4YzAwNzkwZTFiY2UxIiwidXNlcl9pZCI6IjEifQ.JyZDg9XD282HlBSv70Vmu0ysKZVrP6OWINf1S3_wQMA
-
+Authorization: Bearer {{token}}
 
 {
-    "title": "Example note",
-    "content": "Example note"
+  "title": "Example note",
+  "content": "Example note"
 }
 
-
-###
-
-POST http://localhost:8000/api/collections/
+### Collections
+POST {{baseUrl}}/api/collections/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Nzg2MDk2LCJpYXQiOjE3NTc3ODMwOTYsImp0aSI6ImNkMjVlYjI4ZTU3YTQzZmQ5MzQ4YzAwNzkwZTFiY2UxIiwidXNlcl9pZCI6IjEifQ.JyZDg9XD282HlBSv70Vmu0ysKZVrP6OWINf1S3_wQMA
-
+Authorization: Bearer {{token}}
 
 {
-    "name": "Example collection"
+  "name": "Example collection"
 }
 
 ### Register
-
-POST http://localhost:8000/api/auth/register/
+POST {{baseUrl}}/api/auth/register/
 Content-Type: application/json
 
 {
-    "username": "Calcur4",
-    "email": "caleb@calebcurry.com",
-    "password": "password123"
+  "username": "Calcur4",
+  "email": "caleb@calebcurry.com",
+  "password": "password123"
 }
 
 ### Login
-
-POST http://localhost:8000/api/auth/login/
+POST {{baseUrl}}/api/auth/login/
 Content-Type: application/json
 
 {
-    "username": "Calcur4",
-    "password": "password123"
+  "username": "Calcur4",
+  "password": "password123"
 }
 
 ###
 
-POST http://localhost:8000/api/auth/login/
-Content-Type: application/json
-
-{
-    "username": "Calcur4",
-    "password": "password123"
-}
-
-
-### 
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mzc0NTUyLCJpYXQiOjE3NTczNzE1NTIsImp0aSI6ImFjNjFhNjUzNjA3NjQ1NzNiNTIzNzllZDMyMTdiZjQ2IiwidXNlcl9pZCI6IjUifQ.-oD541OBKAIMT6g52y2DYIBlZ8vgmUP6nyzRLZqe9AQ
-
-
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzU3Mzc0NTM2LCJpYXQiOjE3NTczNzE1MzYsImp0aSI6ImMzOTkwZDllMjBjMDRlM2U4MjZkYjZjM2MwMTljMGFmIiwidXNlcl9pZCI6IjYifQ.itsM9E_RwcYH3EF8VDmryX0N8XIc4VjBA_WOv2saKPU
+GET {{baseUrl}}/api/notes?collection_id=5
+Authorization: Bearer {{token}}

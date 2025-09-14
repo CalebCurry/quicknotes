@@ -40,7 +40,7 @@ class NoteSerializer(ModelSerializer):
 
     def validate_collection(self, collection):
         request = self.context.get("request")
-        if request and collection.user != request.user:
+        if collection is not None and request and collection.user != request.user:
             raise serializers.ValidationError("You do not own this collection")
         return collection
 
