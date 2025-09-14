@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import SDK, {type Collection, type Note} from './sdk/api';
 import CreatableSelect from 'react-select/creatable';
+import { Link, useNavigate } from 'react-router-dom';
 
 function App() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [collections, setCollections] = useState<Collection[]>([]);
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   const [selectedCollectionLabel, setSelectedCollectionLabel] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getNotes(){
@@ -91,11 +93,12 @@ function App() {
         {notes.map((note: Note) => {
           return <tr key={note.id}>
             <td>{note.id}</td>
-            <td>{note.title}</td>
+            <td><Link to={`/edit/${note.id}`}>{note.title}</Link></td>
           </tr>
         })}
         </tbody>
       </table>
+      <button onClick={() => {navigate('/edit')}}>+ New Note</button>
     </div>
   );
 }
