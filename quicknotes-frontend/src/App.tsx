@@ -51,14 +51,15 @@ function App() {
   return (
     <div>
       <CreatableSelect isClearable value={
-         {
+        {
           value: selectedCollectionId,
           label: selectedCollectionLabel
-          }
+        }
       }
       
       onChange={(data) => {
         setSelectedCollectionId(data?.value ?? null)
+        setSelectedCollectionLabel(data?.label ?? null)
       }} 
       
       onCreateOption={async (name) => {
