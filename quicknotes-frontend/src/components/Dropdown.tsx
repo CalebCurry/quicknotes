@@ -10,6 +10,8 @@ type Props = {
 
 export default function Dropdown({value, onChange}: Props) {
     const [collections, setCollections] = useState<Collection[]>([]);
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [editValue, setEditValue] = useState<string>("");
 
     useEffect(() => {
         async function getCollections(){
@@ -29,7 +31,8 @@ export default function Dropdown({value, onChange}: Props) {
         getCollections();
     }, []);
 
-    return <CreatableSelect placeholder='Choose a collection' isClearable   
+    return <div>
+        <CreatableSelect placeholder='Choose a collection' isClearable   
         value={ value ? 
             {
                 value,
@@ -43,6 +46,8 @@ export default function Dropdown({value, onChange}: Props) {
             }
         ))}
         onChange={(data) => {
+            setEditValue("");
+            setShowModal(false);
             onChange(data?.value ?? null)
         }}
         
@@ -58,4 +63,37 @@ export default function Dropdown({value, onChange}: Props) {
         }} 
         
         ></CreatableSelect>
+        <button onClick={() => {
+            setEditValue(collections.find((collection) => collection.id === value)?.name ?? "")
+            setShowModal(true)}
+            }>Edit collection</button>
+        { showModal && 
+            <div>
+                <input value={editValue} onChange={(e) => {setEditValue(e.target.value)}}/>
+                <button onClick={async () => {
+                    try {
+                        await SDK.updateCollection(value!, {...collections.find((collection) => collection.id === value), name: editValue})
+                        const data = await SDK.getCollections();
+                        setCollections(data);
+                        setShowModal(false)
+                    } catch (err) {
+                        console.log("something went wrong", err)
+                    }
+
+                }}>Save</button>
+                <button onClick={() => {setShowModal(false)}}>Cancel</button>
+                <button onClick={async () => {
+                    try {
+                        await SDK.deleteCollection(value!)
+                        const data = await SDK.getCollections();
+                        setCollections(data);
+                        setShowModal(false);
+                        onChange(null)
+                    } catch (err) {
+                        console.log("something went wrong", err)
+                    }
+
+                }}>Delete Collection</button>
+            </div> }
+    </div>
 }
