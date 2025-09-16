@@ -24,16 +24,22 @@ export type Note = {
   collection_data?: Collection | null;
 };
 
+export type PaginatedResponse<T> = {
+  next: string | null,
+  previous: string | null,
+  data: T[]
+};
+
 async function getHome(): Promise<string> {
   const res = await api.get("/");
   return res.data
 }
 
-async function getNotes(params?: {
+async function getNotes(url: string | null, params?: {
   collection_id?: number
-}): Promise<Note[]> {
-  const res = await api.get("/api/notes/", {params});
-  return res.data.data; 
+}): Promise<PaginatedResponse<Note>> {
+  const res = await api.get(url ? url : "/api/notes/", {params});
+  return res.data; 
 }
 
 async function getCollectionWithNotes(collectionId: number): Promise<Collection> {

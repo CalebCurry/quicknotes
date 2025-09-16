@@ -17,8 +17,9 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "title": "Example note",
-  "content": "Example note"
+  "title": "Example note 5345345",
+  "content": "Example note",
+  "collection": 13
 }
 
 ### Collections
