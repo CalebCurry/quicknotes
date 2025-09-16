@@ -1,12 +1,16 @@
 import {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import SDK, { type Note } from './sdk/api'
+import Dropdown from './components/Dropdown'
+import { useLocation } from 'react-router-dom'
 
 export default function Edit(){
     const [note, setNote] = useState<Note | null>(null);
     const [noteOriginal, setNoteOriginal] = useState<Note | null>(null);
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const collectionId = location.state?.collectionId;
     
     useEffect(() => {
     async function getNote(){
@@ -23,11 +27,11 @@ export default function Edit(){
                 }
             }
         } else {
-            setNote({ title: "", content: ""})
+            setNote({ title: "", content: "", collection: collectionId})
         }
     }
     getNote();        
-    }, [id]);
+    }, [id, collectionId]);
 
 
     return (
@@ -41,6 +45,9 @@ export default function Edit(){
             <textarea value={note.content} onChange={(e) => {setNote({...note, content: e.target.value})} }></textarea>
             <br />
             <br />
+
+            <Dropdown onChange={(id) => {setNote({...note, collection:id})}} value={note.collection ?? null}/>
+
             {JSON.stringify(note) !== JSON.stringify(noteOriginal) ? <button onClick={() => {
                 if (id) {
                     (async () => {

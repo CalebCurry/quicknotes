@@ -29,7 +29,7 @@ export default function Dropdown({value, onChange}: Props) {
         getCollections();
     }, []);
 
-    return <CreatableSelect placeholder='Filter by Collection' isClearable   
+    return <CreatableSelect placeholder='Choose a collection' isClearable   
         value={ value ? 
             {
                 value,

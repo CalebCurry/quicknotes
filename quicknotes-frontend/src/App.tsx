@@ -47,7 +47,7 @@ function App() {
         })}
         </tbody>
       </table>
-      <button onClick={() => {navigate('/edit')}}>+ New Note</button>
+      <button onClick={() => {navigate('/edit', { state: {collectionId: selectedCollectionId}})}}>+ New Note</button>
     </div>
   );
 }
