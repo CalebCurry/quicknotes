@@ -31,17 +31,17 @@ export default function Edit(){
 
 
     return (
-        <div>
+        <div  className='p-6 flex flex-col gap-2 p-6 flex flex-col max-w-screen-lg mx-auto'>
         { note ? 
         <div>
             <h1> {id ? "Edit Note" : "Create Note"}</h1>
-            <input value={note.title} onChange={(e) => { setNote({...note, title: e.target.value})}}></input>
+            <input placeholder="example title" className='border min-w-80 min-h-10 p-2' value={note.title} onChange={(e) => { setNote({...note, title: e.target.value})}}></input>
             <br />
             <br />
-            <textarea value={note.content} onChange={(e) => {setNote({...note, content: e.target.value})} }></textarea>
+            <textarea placeholder="example body" className='border min-w-150 min-h-50 p-2' value={note.content} onChange={(e) => {setNote({...note, content: e.target.value})} }></textarea>
             <br />
             <br />
-            {JSON.stringify(note) !== JSON.stringify(noteOriginal) ? <button onClick={() => {
+            {JSON.stringify(note) !== JSON.stringify(noteOriginal) ? <button className='btn btn-ok' onClick={() => {
                 if (id) {
                     (async () => {
                         const updatedNote = await SDK.updateNote(note.id!, note);
@@ -58,7 +58,7 @@ export default function Edit(){
                 }
 
             }}>Save</button>: <></>}
-            <button onClick={() => {
+            <button className='btn btn-bad' onClick={() => {
                 (async () => {
                     await SDK.deleteNote(note.id!);
                     navigate("/");
@@ -68,9 +68,11 @@ export default function Edit(){
         : 
         <></>
         }
-        <button onClick={() => {
+        <div>
+        <button className='btn btn-ok w-39' onClick={() => {
             navigate("/")
         }}>Back</button>
+        </div>
         </div>
     )
 }

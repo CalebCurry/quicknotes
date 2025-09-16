@@ -11,11 +11,13 @@ import {
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
+    <div>
       <Routes>
         <Route path='/' element={<App />}/>
         <Route path='/edit/:id' element={<Edit />}/>
         <Route path='/edit' element={<Edit />}/>
       </Routes>
+    </div>
     </BrowserRouter>
   </StrictMode>,
 )

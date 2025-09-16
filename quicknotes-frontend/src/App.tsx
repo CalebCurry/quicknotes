@@ -49,16 +49,16 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <CreatableSelect isClearable value={
-         {
-          value: selectedCollectionId,
-          label: selectedCollectionLabel
-          }
+    <div className='p-6 flex flex-col gap-6 max-w-screen-lg mx-auto'>
+      <CreatableSelect  placeholder="Filter by collection" className='w-120' isClearable value={
+      selectedCollectionId
+    ? { value: selectedCollectionId, label: selectedCollectionLabel }
+    : null 
       }
       
       onChange={(data) => {
         setSelectedCollectionId(data?.value ?? null)
+        setSelectedCollectionLabel(data?.label ?? null)
       }} 
       
       onCreateOption={async (name) => {
@@ -82,23 +82,24 @@ function App() {
         ))}>
 
       </CreatableSelect>
-      <table border={1} cellPadding={10}>
+      <table >
         <thead>
           <tr>
-          <th>ID</th>
-          <th>Title</th>
+          <th className='p-3 border'>ID</th>
+          <th className='p-3 border'>Title</th>
           </tr>
         </thead>
         <tbody>
         {notes.map((note: Note) => {
           return <tr key={note.id}>
-            <td>{note.id}</td>
-            <td><Link to={`/edit/${note.id}`}>{note.title}</Link></td>
+            <td className='p-3 border'>{note.id}</td>
+            <td className='p-3 border'><Link to={`/edit/${note.id}`}>{note.title}</Link></td>
+            
           </tr>
         })}
         </tbody>
       </table>
-      <button onClick={() => {navigate('/edit')}}>+ New Note</button>
+      <button className='btn w-40 btn-ok' onClick={() => {navigate('/edit')}}>+ New Note</button>
     </div>
   );
 }
