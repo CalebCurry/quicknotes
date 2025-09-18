@@ -37,6 +37,7 @@ async function getHome(): Promise<string> {
 
 async function getNotes(url: string | null, params?: {
   collection_id?: number
+  page_size?: number
 }): Promise<PaginatedResponse<Note>> {
   const res = await api.get(url ? url : "/api/notes/", {params});
   return res.data; 

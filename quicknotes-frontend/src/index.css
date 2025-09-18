@@ -1,0 +1,17 @@
+@import 'tailwindcss';
+
+.btn {
+    @apply px-4 mr-1 py-2 rounded;
+}
+
+.btn-ok {
+    @apply bg-blue-600 text-white;
+}
+
+.btn-disabled {
+    @apply bg-gray-600 text-black;
+}
+
+.btn-bad {
+    @apply bg-red-600 text-white;
+}

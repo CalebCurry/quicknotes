@@ -32,7 +32,9 @@ export default function Dropdown({value, onChange}: Props) {
     }, []);
 
     return <div>
-        <CreatableSelect placeholder='Choose a collection' isClearable   
+        <div className="flex justify-left">
+            
+        <CreatableSelect className="w-120" placeholder='Choose a collection' isClearable   
         value={ value ? 
             {
                 value,
@@ -63,10 +65,12 @@ export default function Dropdown({value, onChange}: Props) {
         }} 
         
         ></CreatableSelect>
-        <button onClick={() => {
+        { value && <button className="btn btn-ok" onClick={() => {
             setEditValue(collections.find((collection) => collection.id === value)?.name ?? "")
             setShowModal(true)}
-            }>Edit collection</button>
+            }>Edit collection</button> }
+        </div>
+
         { showModal && 
             <div>
                 <input value={editValue} onChange={(e) => {setEditValue(e.target.value)}}/>

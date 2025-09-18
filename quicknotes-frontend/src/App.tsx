@@ -12,8 +12,7 @@ function App() {
   const navigate = useNavigate();
   const getNotes = useCallback(async function getNotes(url: string | null = null){
     try {
-      const response = await SDK.getNotes(url, selectedCollectionId ? {collection_id: selectedCollectionId} : {});
-      console.log(response);
+      const response = await SDK.getNotes(url, selectedCollectionId ? {collection_id: selectedCollectionId, page_size: 10} : {page_size: 10});
       setNext(response.next);
       setPrev(response.previous);
       setNotes(response.data);
@@ -32,28 +31,40 @@ function App() {
   }, [selectedCollectionId, getNotes]);
 
   return (
-    <div>
+    <div className="p-6 flex flex-col gap-6 max-w-screen-lg mx-auto">
       <Dropdown value={selectedCollectionId} onChange={setSelectedCollectionId}/>
- 
-      <table border={1} cellPadding={10}>
+      <div className="min-h-[540px]">
+      <table className="w-full">
         <thead>
           <tr>
-          <th>ID</th>
-          <th>Title</th>
+          <th className="border p-3">ID</th>
+          <th className="border p-3">Title</th>
           </tr>
         </thead>
         <tbody>
         {notes.map((note: Note) => {
           return <tr key={note.id}>
-            <td>{note.id}</td>
-            <td><Link to={`/edit/${note.id}`}>{note.title}</Link></td>
+            <td className="border p-3">{note.id}</td>
+            <td className="border p-3"><Link to={`/edit/${note.id}`}>{note.title}</Link></td>
           </tr>
         })}
         </tbody>
       </table>
-      {prev && <button onClick={() => {getNotes(prev)}}>←</button>}
-      {next && <button onClick={() => {getNotes(next)}}>→</button>}
-      <button onClick={() => {navigate('/edit', { state: {collectionId: selectedCollectionId}})}}>+ New Note</button>
+      </div>
+      <div className="flex justify-left">
+
+        <button className="btn btn-ok w-40" onClick={() => {navigate('/edit', { state: {collectionId: selectedCollectionId}})}}>+ New Note</button>
+        {prev ? 
+          <button className="btn btn-ok w-40" onClick={() => {getNotes(prev)}}>←</button> : 
+          <button disabled className="btn btn-disabled w-40">←</button>}
+        {next ? 
+          <button className="btn btn-ok w-40" onClick={() => {getNotes(next)}}>→</button> :
+          <button disabled className="btn btn-disabled w-40">→</button>
+        }
+
+      </div>
+
+     
     </div>
   );
 }
