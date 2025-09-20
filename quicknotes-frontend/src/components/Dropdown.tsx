@@ -20,7 +20,6 @@ export default function Dropdown({value, onChange}: Props) {
         async function getCollections(){
             try {
             const data = await SDK.getCollections();
-            console.log(data)
             setCollections(data)
             } catch (err){
             if (err instanceof Error){
@@ -33,8 +32,7 @@ export default function Dropdown({value, onChange}: Props) {
 
         getCollections();
     }, []);
-
-    console.log(editValue, editValueOriginal, "!")
+    
     return ( 
     <div>
         <div className="flex justify-left">
