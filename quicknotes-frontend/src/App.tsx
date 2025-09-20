@@ -37,7 +37,7 @@ function App() {
       <table className="w-full">
         <thead>
           <tr>
-          <th className="border p-3">ID</th>
+          <th className="border p-3 w-24">ID</th>
           <th className="border p-3">Title</th>
           </tr>
         </thead>
