@@ -2,6 +2,11 @@ import SDK, { type Note, type Collection } from "./api.ts";
 
 try {
   console.log("home:", await SDK.getHome());
+
+  console.log("Register", await SDK.register({username: "test", password: "pass", email: "email@calebcurry.com"}));
+  console.log("Login", await SDK.login({username: "test", password: "pass"}));
+
+
   console.log("collections:", await SDK.getCollections());
   console.log("notes:", await SDK.getNotes());
 
@@ -29,7 +34,7 @@ try {
 
   // Get notes by collection
   console.log("getNotesByCollection:", await SDK.getCollectionWithNotes(collection.id!));
-  console.log("getNotesCollectionIdParam", await SDK.getNotes({collection_id: collection.id!}))
+  console.log("getNotesCollectionIdParam", await SDK.getNotes(null, {collection_id: collection.id!}))
   // Delete the note
   await SDK.deleteNote(createdNote.id!);
   console.log("deleteNote: success");

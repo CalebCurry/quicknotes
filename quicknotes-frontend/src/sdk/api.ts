@@ -94,7 +94,34 @@ async function getHome(): Promise<string> {
   return res.data
 }
 
-async function getNotes(url: string | null, params?: {
+export type User = {
+  id?: number,
+  email?: string,
+  password?: string,
+  username: string,
+}
+// Register a new user
+async function register(data: User) {
+  const res = await api.post("/api/auth/register/", data);
+  if (res.data.access && res.data.refresh) {
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+  }
+  return res.data;
+}
+
+// Login an existing user
+async function login(data: User) {
+  const res = await api.post("/api/auth/login/", data);
+  if (res.data.access && res.data.refresh) {
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+  }
+  return res.data;
+}
+
+
+async function getNotes(url?: string | null, params?: {
   collection_id?: number
   page_size?: number
 }): Promise<PaginatedResponse<Note>> {
@@ -166,4 +193,7 @@ export default {
     updateCollection,
     deleteCollection,
     getCollectionWithNotes,
+
+    register,
+    login
 };
