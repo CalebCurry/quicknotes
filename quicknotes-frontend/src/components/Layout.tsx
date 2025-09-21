@@ -1,8 +1,15 @@
 import { Outlet } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext';
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Layout() {
-
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
+  console.log(auth?.isAuthenticated)
+  
   return (
+    
     <div>
     <header className="bg-blue-900">
       <nav className="mx-auto max-w-7xl flex items-center justify-between p-6">
@@ -17,9 +24,19 @@ export default function Layout() {
           </a>
         </div>
     
-        <a href="/login" className="font-semibold text-white">
-          Log in →
-        </a>
+
+       {auth?.isAuthenticated ? (
+          <button onClick={() => {
+              auth.setIsAuthenticated(false);
+              auth.logout();
+            }} className="font-semibold text-white">
+            Logout
+          </button>
+        ) : (
+          <a href="/login" className="font-semibold text-white">
+            Log in →
+          </a>
+      )}
         
       </nav>
     </header>

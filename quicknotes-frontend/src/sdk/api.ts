@@ -103,7 +103,7 @@ export type User = {
 // Register a new user
 async function register(data: User) {
   const res = await api.post("/api/auth/register/", data);
-  if (res.data.access && res.data.refresh) {
+    if (res.data.access && res.data.refresh) {
     localStorage.setItem("access", res.data.access);
     localStorage.setItem("refresh", res.data.refresh);
   }
@@ -113,7 +113,7 @@ async function register(data: User) {
 // Login an existing user
 async function login(data: User) {
   const res = await api.post("/api/auth/login/", data);
-  if (res.data.access && res.data.refresh) {
+    if (res.data.access && res.data.refresh) {
     localStorage.setItem("access", res.data.access);
     localStorage.setItem("refresh", res.data.refresh);
   }

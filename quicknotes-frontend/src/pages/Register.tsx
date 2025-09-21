@@ -1,17 +1,21 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import SDK from '../sdk/api'
+import { AuthContext } from '../context/AuthContext'
 
 export default function Register() {
   const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const auth = useContext(AuthContext);
 
   async function handleRegister() {
     try {
-      await SDK.register({username, email, password})
-      navigate('/login')
+        await SDK.register({username, email, password})
+        navigate('/')
+      
+      
     } catch (err) {
       console.log("Registration failed", err)
     }

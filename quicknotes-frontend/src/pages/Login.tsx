@@ -1,17 +1,21 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import SDK from '../sdk/api'
+import { AuthContext } from '../context/AuthContext'
 
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const auth = useContext(AuthContext);
 
   async function handleLogin() {
     try {
-      await SDK.login({username, password});
-      navigate('/')
-    } catch (err) {
+        await SDK.login({ username, password });
+        auth?.setIsAuthenticated(true);
+        navigate('/');
+    }
+     catch (err) {
       console.log("Login failed", err)
     }
   }
