@@ -33,11 +33,11 @@ function App() {
   return (
     <div className="p-6 flex flex-col gap-6 max-w-screen-lg mx-auto">
       <Dropdown value={selectedCollectionId} onChange={setSelectedCollectionId}/>
-      <div className="min-h-[540px]">
+      <div>
       <table className="w-full">
         <thead>
           <tr>
-          <th className="border p-3">ID</th>
+          <th className="border p-3 w-24">ID</th>
           <th className="border p-3">Title</th>
           </tr>
         </thead>

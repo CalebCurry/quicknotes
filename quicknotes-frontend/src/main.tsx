@@ -7,14 +7,17 @@ import {
   BrowserRouter, Routes, Route, 
   //Link
 } from 'react-router-dom'
+import Layout from './components/Layout.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<App />}/>
-        <Route path='/edit/:id' element={<Edit />}/>
-        <Route path='/edit' element={<Edit />}/>
+        <Route element={<Layout />} >
+          <Route path='/' element={<App />}/>
+          <Route path='/edit/:id' element={<Edit />}/>
+          <Route path='/edit' element={<Edit />}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,
