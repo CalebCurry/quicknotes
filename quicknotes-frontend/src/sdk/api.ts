@@ -19,31 +19,46 @@ api.interceptors.request.use((config) => {
   return config;
 }, (error) => Promise.reject(error));
 
+let isRefreshing = false;
+let refreshPromise: Promise<string> | null = null;
+
 api.interceptors.response.use((response) => {
   console.log("response interceptor hit")
   return response;
 }, async (error) => {
-  if(error.response.status == 401 && !error.config.url.includes('/api/auth/refresh') && !error.config._retry){
+  if(error.response?.status == 401 && !error.config.url.includes('/api/auth/refresh') && !error.config._retry){
     error.config._retry = true;
     //refresh
     console.log("Refreshing access token");
-    try {
-      const refresh = localStorage.getItem("refresh");
-      const res = await api.post("/api/auth/refresh/", { refresh });
-      
-      const newAccess = res.data.access;
-      const newRefresh = res.data.refresh;
+    
+    if (!isRefreshing){
+      isRefreshing = true;
 
-      localStorage.setItem("access", newAccess);
-      localStorage.setItem("refresh", newRefresh);
+      refreshPromise = (async () => {
+        try {
+          const refresh = localStorage.getItem("refresh");
+          const res = await api.post("/api/auth/refresh/", { refresh });
+          
+          const newAccess = res.data.access;
+          const newRefresh = res.data.refresh;
 
-      console.log("NEW TOKENS", newAccess, newRefresh);
-      error.config.headers.Authorization = `Bearer ${newAccess}`;
-      return api.request(error.config);
-    } catch(refreshErr){
-      Promise.reject(refreshErr);
+          localStorage.setItem("access", newAccess);
+          localStorage.setItem("refresh", newRefresh);
+
+          return newAccess;
+
+        } finally {
+          isRefreshing = false;
+        }
+      })();
     }
-  }
+
+    const newAccess = await refreshPromise;
+
+    error.config.headers.Authorization = `Bearer ${newAccess}`;
+    return api.request(error.config);
+  } 
+  return Promise.reject(error);
 });
 
 export type Collection = {
