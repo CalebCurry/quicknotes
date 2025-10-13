@@ -6,19 +6,8 @@ import { AuthContext } from '../context/AuthContext'
 export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate();
   const auth = useContext(AuthContext);
 
-  async function handleLogin() {
-    try {
-        await SDK.login({ username, password });
-        auth?.setIsAuthenticated(true);
-        navigate('/');
-    }
-     catch (err) {
-      console.log("Login failed", err)
-    }
-  }
 
   return (
     <div className="p-6 flex flex-col gap-2 max-w-sm mx-auto">
@@ -36,7 +25,9 @@ export default function Login() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn btn-ok mt-2" onClick={handleLogin}>
+      <button className="btn btn-ok mt-2" onClick={() => {
+         auth!.login(username, password); 
+      }}>
         Login
       </button>
       <p className="text-sm text-gray-500 mt-2">

@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Layout() {
-  const navigate = useNavigate();
   const auth = useContext(AuthContext);
   console.log(auth?.isAuthenticated)
   
@@ -27,7 +26,6 @@ export default function Layout() {
 
        {auth?.isAuthenticated ? (
           <button onClick={() => {
-              auth.setIsAuthenticated(false);
               auth.logout();
             }} className="font-semibold text-white">
             Logout

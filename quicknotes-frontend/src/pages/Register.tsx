@@ -12,7 +12,7 @@ export default function Register() {
 
   async function handleRegister() {
     try {
-        await SDK.register({username, email, password})
+        
         navigate('/')
       
       
@@ -43,7 +43,10 @@ export default function Register() {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button className="btn btn-ok mt-2" onClick={handleRegister}>
+      <button className="btn btn-ok mt-2" onClick={()  => {
+            auth?.register(username, email, password)
+        }
+      }>
         Register
       </button>
       <p className="text-sm text-gray-500 mt-2">
