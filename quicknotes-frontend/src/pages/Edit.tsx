@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import SDK, { type Note } from './sdk/api'
-import Dropdown from './components/Dropdown'
+import SDK, { type Note } from '../sdk/api'
+import Dropdown from '../components/Dropdown'
 import { useLocation } from 'react-router-dom'
 
 export default function Edit(){

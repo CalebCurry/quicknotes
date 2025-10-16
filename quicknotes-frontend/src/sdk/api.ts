@@ -81,6 +81,33 @@ export type PaginatedResponse<T> = {
   data: T[]
 };
 
+export type User = {
+  id?: number,
+  email?: string, 
+  password?: string, 
+  username: string
+};
+
+async function register(data: User){
+  const res = await api.post("/api/auth/register/", data);
+  if(res.data.access && res.data.refresh){
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+  }
+  return res.data;
+}
+
+async function login(data: User){
+  const res = await api.post("/api/auth/login/", data);
+  if(res.data.access && res.data.refresh){
+    localStorage.setItem("access", res.data.access);
+    localStorage.setItem("refresh", res.data.refresh);
+  }
+  return res.data;
+}
+
+
+
 async function getHome(): Promise<string> {
   const res = await api.get("/");
   return res.data
@@ -158,4 +185,8 @@ export default {
     updateCollection,
     deleteCollection,
     getCollectionWithNotes,
+
+    //auth
+    register,
+    login
 };

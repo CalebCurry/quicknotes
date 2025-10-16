@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 
-export default function Example() {
+export default function Layout() {
 
   return (
     <div>
@@ -15,7 +15,7 @@ export default function Example() {
                     </svg>
                 </a>
                 </div>
-            <a href="/account" className="font-semibold text-white">Log in →</a>
+            <a href="/login" className="font-semibold text-white">Log in →</a>
             </nav>
         </header>
         <Outlet />
