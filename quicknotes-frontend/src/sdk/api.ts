@@ -113,6 +113,11 @@ async function getHome(): Promise<string> {
   return res.data
 }
 
+async function getAISummary(note: Note): Promise<string> {
+  const res = await api.post(`/api/ai/`, note);
+  return res.data.data; 
+}
+
 async function getNotes(url: string | null, params?: {
   collection_id?: number
   page_size?: number
@@ -170,6 +175,7 @@ async function deleteCollection(id: number): Promise<void> {
 }
 
 export default {
+    getAISummary,
     getHome,
     // notes
     getNotes,

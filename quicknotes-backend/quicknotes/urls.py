@@ -38,5 +38,8 @@ urlpatterns = [
     # auth
     path('api/auth/login/', TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path('api/auth/refresh/', TokenRefreshView.as_view(), name="token_refresh"),
-    path('api/auth/register/', views.register, name="register")
+    path('api/auth/register/', views.register, name="register"),
+
+    # AI
+    path('api/ai/', views.ai, name='ai')
 ]

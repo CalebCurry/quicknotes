@@ -11,6 +11,8 @@ export default function Edit(){
     const navigate = useNavigate();
     const location = useLocation();
     const collectionId = location.state?.collectionId;
+    const [ai, setAI] = useState("");
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
     async function getNote(){
@@ -76,10 +78,24 @@ export default function Edit(){
                     navigate("/");
                 })()
             }} >Delete</button>
+            
+            <button className="btn btn-ok" disabled={loading} onClick={() => {
+                (async () => {
+                    setLoading(true);
+                    try {
+                        const data = await SDK.getAISummary(note);
+                        setAI(data);
+                    } finally {
+                        setLoading(false);
+                    }
+                })()
+            }} >AI Summary</button>
         </div>
         : 
         <></>
-        }
+        } 
+
+        { loading ? <div>loading...</div> : ai ? <div>{ai}</div> : <></>}
 
         </div>
     )

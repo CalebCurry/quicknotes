@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse, JsonResponse
 
 from quicknotes.serializers import CollectionSerializer, CollectionWithNotesSerializer, NoteSerializer, UserSerializer
@@ -9,9 +10,32 @@ from rest_framework.decorators import action, api_view, authentication_classes, 
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.models import User
 from rest_framework.permissions import AllowAny
+from openai import OpenAI
+
+client = OpenAI(api_key=settings.OPENAI_KEY)
 
 def home(request):
     return HttpResponse("Welcome Home!!!!")
+
+@api_view(["POST"])
+def ai(request):
+    title = request.data.get("title")
+    content = request.data.get("content")
+    
+    completions = client.chat.completions.create(model="gpt-4", messages=[
+        { 
+            "role": "system",
+            "content": "Briefly summarize the content"
+        },
+        {
+            "role": "user",
+            "content": content
+        }
+    ])
+
+    response = completions.choices[0].message.content
+
+    return Response({"data": response})
 
 @api_view(["POST"])
 @authentication_classes([])
