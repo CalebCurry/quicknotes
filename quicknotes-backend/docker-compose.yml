@@ -1,42 +1,42 @@
 services:
-  webdev:
-    build: .
-    env_file:
-      - .env
-    ports:
-      - "8000:8000"
-    volumes:
-      - .:/app
-    depends_on:
-      db:
-        condition: service_healthy
-    command: >
-      sh -c "python manage.py migrate --no-input &&
-      python manage.py runserver 0.0.0.0:8000"    
-  #uwsgi --ini init.ini"
+    webdev:
+        build: .
+        env_file:
+            - .env
+        ports:
+            - '8000:8000'
+        volumes:
+            - .:/app
+        depends_on:
+            db:
+                condition: service_healthy
+        command: >
+            sh -c "python manage.py migrate --no-input &&
+            python manage.py runserver 0.0.0.0:8000"
+    #uwsgi --ini init.ini"
+    db:
+        image: postgres
+        restart: always
+        ports:
+            - '5433:5432'
+        environment:
+            - POSTGRES_PASSWORD=password
+        healthcheck:
+            test: ['CMD-SHELL', 'pg_isready -U postgres']
+            interval: 10s
+            timeout: 5s
+            retries: 10
+            start_period: 10s
+        volumes:
+            - postgres_data:/var/lib/postgresql
 
-  db:
-    image: postgres
-    restart: always
-    ports:
-      - "5433:5432"
-    environment:
-      - POSTGRES_PASSWORD=password
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - postgres_data:/var/lib/postgresql/data    
-
-  frontend:
-    build: ../quicknotes-frontend
-    volumes: 
-      - ../quicknotes-frontend/src:/app/src
-    ports:
-      - 5173:5173
-    command: sh -c "npm run dev -- --host 0.0.0.0"
+    frontend:
+        build: ../quicknotes-frontend
+        volumes:
+            - ../quicknotes-frontend/src:/app/src
+        ports:
+            - 5173:5173
+        command: sh -c "npm run dev -- --host 0.0.0.0"
 
 volumes:
-  postgres_data:
+    postgres_data:
